@@ -34,12 +34,21 @@ while(True):
                     b[i][abs(j-1)]=1
                 if a[i][(j+1)%200]==0:
                     b[i][(j+1)%200]=1
-
+                
+                if a[abs(i-1)][abs(j-1)]==0:                ##       a  b  c
+                    b[abs(i-1)][abs(j-1)]=1                 #        d  e  f
+                if a[(i+1)%200][abs(j-1)]==0:               #        g  h  i
+                    b[(i+1)%200][abs(j-1)]=1 
+                if a[abs(i-1)][(j+1)%200]==0:       ## If e is infected, you were converting b,d,f and h to 1 but
+                    b[abs(i-1)][(j+1)%200]=1        # missing out a,c, g and i. These four if conditions will 
+                if a[(i+1)%200][(j+1)%200]==0:      # take care of that.
+                    b[(i+1)%200][(j+1)%200]=1          
+                    
 #this is to save swap changes in main array
     for i in range (200):
         for j in range (200):
-            if b[i][j]==1:
-                a[i][j]=1
+            if b[i][j]==1 and a[i][j] == 0:     # Earlier, you were converting every a[i][j] to 1 but in this iteration,    
+                a[i][j]=1                       # we have to change those only which are 1. This will increase the deadcount
 # this just to swap 10 independent indices to different 10 indices
     list1=[]
     while(len(list1)!=10):
