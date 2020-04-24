@@ -9,7 +9,11 @@ def knn(dataframe, k, history):
         avg_coordinates.append(avg)
 
     list = dataframe["Song Name"].values.tolist()
-    list.remove(current_song)
+    for now in history:
+      list.remove(now)
+    if song1:
+      list.remove(song1)
+    
     upcoming = []
 
     for j in range(k):
@@ -53,13 +57,14 @@ current_song = input("\nPlease type your first song: ")
 rejection_score = [0]*60
 recent_history = [current_song]
 
-
+song1 = ''
+song2 = ''
 song1, song2 = knn(df, 2, recent_history)
 
 while True:
 
     print(f'''\nCurrently playing: {current_song}
-            Upcoming song:{song1}\n''')
+            Upcoming song:{song1}, {song2}\n''')
 
     command = input("Type command here: ").lower()
 
@@ -74,7 +79,7 @@ while True:
             recent_history.append(current_song)
 
 
-        song2 = knn(df, 1, recent_history)
+        song2 = knn(df, 1, recent_history)[0]
 
     elif command == "skip-next":
 
