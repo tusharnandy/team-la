@@ -134,7 +134,7 @@ while True:
         wrong_predictions+=2
         print('Choose the song you wish to play: ')
         print(df['Song Name'])
-        current_song = input("What would you like to hear? ").lower()
+        current_song = input("What would you like to hear? ")
         
         # code for negative marking
         for song_num in range (60):
@@ -160,6 +160,7 @@ while True:
             recent_history.append(current_song)
 
         song1, song2 = knn(df,2,recent_history)
+
         
     elif command == "exit":
         accuracy= 1- (wrong_predictions/total_predictions)
