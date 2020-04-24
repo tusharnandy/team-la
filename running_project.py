@@ -78,7 +78,7 @@ current_song = input("\nPlease type your first song: ")
 rejection_score = [0]*60
 recent_history = [current_song]
 wrong_predictions=0
-total_predictions=0
+total_predictions=2
 
 song1 = ''
 song2 = ''
@@ -107,7 +107,7 @@ while True:
 
     elif command == "skip-next":
         total_predictions+=1
-        wrong_predictions=1
+        wrong_predictions+=1
         current_song = song2
 
         if len(recent_history) < 4:
@@ -130,7 +130,7 @@ while True:
         song1, song2 = knn(df, 2, recent_history)
 
     elif command == "search":
-        total_predictions+=1
+        total_predictions+=2
         wrong_predictions+=2
         print('Choose the song you wish to play: ')
         print(df['Song Name'])
