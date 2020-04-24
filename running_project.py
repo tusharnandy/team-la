@@ -91,6 +91,10 @@ while True:
             recent_history.remove(recent_history[0])
             recent_history.append(current_song)
 
+        for song_num in range (60):
+            if current_song == df['Song Name'][song_num]:
+                break
+
         for song1_num in range (60):
             if song1 == df['Song Name'][song1_num]:
                 break
@@ -98,7 +102,7 @@ while True:
         moods = df.columns.tolist()[2:5]
         mood = moods[0]
         for i in range(1, 3):
-            if df[mood][song1_num] < df[moods[i]][song1_num]:
+            if df[mood][song_num] < df[moods[i]][song_num]:
                 mood = moods[i]
 
         if rejection_score[song1_num] == 0 and df[mood][song1_num] != 0:
