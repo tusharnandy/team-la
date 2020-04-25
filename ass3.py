@@ -18,8 +18,11 @@ while(True):
                     a[i][j]=-404
                 else:                       #else gets immuned
                     a[i][j]=-2000
-            if a[i][j]>0:                 #if suffering add number of days
-                a[i][j]+=1
+            if a[i][j]>0:
+                if random.random() <= 0.05:  #to check if dead
+                    a[i][j]=-404                #if suffering add number of days
+                else:
+                    a[i][j]+=1
 
 
 # this converts uninfected neighbours infected
@@ -34,11 +37,19 @@ while(True):
                     b[i][abs(j-1)]=1
                 if a[i][(j+1)%200]==0:
                     b[i][(j+1)%200]=1
+                if a[abs(i-1)][abs(j-1)]==0:
+                    b[abs(i-1)][abs(j-1)]=1
+                if a[(i+1)%200][(j+1)%200]==0:
+                    b[(i+1)%200][(j+1)%200]=1
+                if a[(i+1)%200][abs(j-1)]==0:
+                    b[(i+1)%200][abs(j-1)]=1
+                if a[abs(i-1)][(j+1)%200]==0:
+                    b[abs(i-1)][(j+1)%200]=1
 
 #this is to save swap changes in main array
     for i in range (200):
         for j in range (200):
-            if b[i][j]==1:
+            if b[i][j]==1 and a[i][j]==0:
                 a[i][j]=1
 # this just to swap 10 independent indices to different 10 indices
     list1=[]
@@ -77,6 +88,6 @@ while(True):
         break
 
 print(iterations)
-print(deadcount)
-print(immcount)
-print(illcount)
+print(deadcount/400)
+print(immcount/400)
+print(illcount/400)
